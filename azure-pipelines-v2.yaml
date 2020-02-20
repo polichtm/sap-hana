@@ -33,6 +33,7 @@ stages:
         pip install packaging
         pip install --ignore-installed pyyaml ansible[azure]
         sudo -H pip install msrest==0.6.0
+        echo $(landscape-tenant)
       displayName: 'Install python tools'
 #####################################################################
 # This stage create resources for below test cases:                 #

@@ -233,6 +233,7 @@ A typical deployment lifecycle will require the following steps:
 | <sub></sub>                                                     | <sub>path_to_public_key</sub>                 | <sub>string</sub> | <sub>(Optional) Path to public key. Reuiqred if key is used as   Authentication.type for any virtual machine. All deployed virtual machine   will share the same SSH key pair.</sub>                                                                                                                                                                                                                                   |
 | <sub>options</sub>                                              | <sub>enable_secure_transfer</sub>             | <sub>bool</sub>   | <sub>(Optional) Default true. If se to true, secure transfer will   be enabled.</sub>                                                                                                                                                                                                                                                                                                                                  |
 | <sub></sub>                                                     | <sub>ansible_execution</sub>                  | <sub>bool</sub>   | <sub>(Optional) Default true. If set to true, Ansible playbook will   be executed from jumpbox from terraform deployment.</sub>                                                                                                                                                                                                                                                                                       |
+| <sub></sub>                                                     | <sub>enable_prometheus</sub>                  | <sub>bool</sub>   | <sub>(Optional) Default true. If set to true, Ansible playbook will enable prometheus<sup>[2](#myfootnote2)</sup> on the VM.</sub>                                                                                                                                                                                                                                                                                       |
 
 
 <sup>[1](#myfootnote1)</sup>: Current Ansible playbook suppports images for SAP applications, e.g. SLES-SAP, RHEL-SAP-HANA. 
@@ -240,6 +241,8 @@ A typical deployment lifecycle will require the following steps:
 And we only include OS configuration for:
 - SLES 12
 - RHEL 7.
+
+<sup>[2](#myfootnote2)</sup>: With [Prometheus](https://prometheus.io/) enabled, you will have more possiblity when you monitor your HANA instance using Azure Monitor for SAP Solutions (preview).
 
 If you use BYOS image, the Ansible playbook will throw error during the OS configuration. 
 

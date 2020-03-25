@@ -39,9 +39,6 @@ url_sap_hdbserver = "VAR_HDBSERVER_URL"
 # URL to download HANA STUDIO for Windows server package from
 url_hana_studio_windows = "VAR_HANA_STUDIO_WINDOWS_URL"
 
-# URL to download SAP HOST AGENT package from
-url_sap_hostagent = "VAR_SAP_HOST_AGENT_URL"
-
 # Password for the OS sapadm user
 pw_os_sapadm = "VAR_SAPADMUSER_PASSWORD"
 
@@ -80,7 +77,6 @@ install_cockpit = false
 install_webide = false
 
 # Set this flag to false to install HDB with single containers (tenants)
-hdb_mdc = false
 hana1_db_mode = "single_container"
 
 # Set this flag to true to install the Windows bastion host
@@ -88,3 +84,6 @@ windows_bastion = true
 
 # Password for the Windows bastion host admin user
 pw_bastion_windows = "VAR_WINDOWS_ADMIN_PASSWORD"
+
+# Set this to be a list of the ip addresses that should be allowed by the NSG.  Empty list means that no restrictions are placed
+allow_ips = ["0.0.0.0/0"]

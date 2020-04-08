@@ -1,3 +1,13 @@
+- name: download vcredist_x64.exe
+  win_get_url:
+    url: http://download.microsoft.com/download/0/5/6/056DCDA9-D667-4E27-8001-8A0C6971D6B1/vcredist_x64.exe
+    dest: C:\Users\{{ bastion_username_windows }}\Downloads\vcredist_x64.exe
+
+- name: Install vcredist_x64.exe
+  win_command: vcredist_x64.exe /install /quiet /norestart
+  args:
+    chdir: C:\Users\{{ bastion_username_windows }}\Downloads
+
 - name: download sapcar
   win_get_url:
     url: "{{ url_sapcar_windows }}"

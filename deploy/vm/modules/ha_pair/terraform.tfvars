@@ -39,9 +39,6 @@ url_sap_hdbserver = "VAR_HDBSERVER_URL"
 # URL to download HANA STUDIO for Windows server package from
 url_hana_studio_windows = "VAR_HANA_STUDIO_WINDOWS_URL"
 
-# URL to download SAP HOST AGENT package from
-url_sap_hostagent = "VAR_SAP_HOST_AGENT_URL"
-
 # Password for the OS sapadm user
 pw_os_sapadm = "VAR_SAPADMUSER_PASSWORD"
 

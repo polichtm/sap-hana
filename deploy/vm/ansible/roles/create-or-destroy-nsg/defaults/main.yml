@@ -9,6 +9,13 @@ hana_nsg_rules_common:
     priority: 101
     direction: Inbound
     source_address_prefix: "{{ allow_ips }}"
+  - name: RDP
+    protocol: Tcp
+    destination_port_range: 3389
+    access: Allow
+    priority: 201
+    direction: Inbound
+    source_address_prefix: "{{ allow_ips }}"
   - name: open-hana-db-ports
     protocol: Tcp
     priority: 102

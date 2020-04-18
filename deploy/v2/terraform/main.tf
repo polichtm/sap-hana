@@ -71,6 +71,7 @@ module "output_files" {
   public-ips-jumpboxes-linux   = module.jumpbox.public-ips-jumpboxes-linux
   nics-dbnodes-admin           = module.hdb_node.nics-dbnodes-admin
   nics-dbnodes-db              = module.hdb_node.nics-dbnodes-db
+  loadbalancers                = module.hdb_node.loadbalancers
 }
 
 resource "null_resource" "ansible_playbook" {
@@ -91,6 +92,7 @@ resource "null_resource" "ansible_playbook" {
       "curl -i -H \"Metadata: \"true\"\" -H \"user-agent: SAP AutoDeploy/${var.auto-deploy-version}; scenario=${var.scenario}; deploy-status=Terraform_finished\" http://169.254.169.254/metadata/instance?api-version=${var.api-version}",
       "export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES",
       "export ANSIBLE_HOST_KEY_CHECKING=False",
+      "source ~/export-clustering-sp-details.sh",
       var.options.ansible_execution ? "ansible-playbook -i hosts ~/sap-hana/deploy/v2/ansible/sap_playbook.yml" : "ansible-playbook --version"
     ]
   }

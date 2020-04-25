@@ -121,69 +121,6 @@ data "azurerm_subnet" "subnet-sap-app" {
   virtual_network_name = split("/", var.infrastructure.vnets.sap.subnet_app.arm_id)[8]
 }
 
-
-# NSGs ===========================================================================================================
-
-# Creates mgmt subnet nsg
-resource "azurerm_network_security_group" "nsg-mgmt" {
-  count               = var.infrastructure.vnets.management.subnet_mgmt.nsg.is_existing ? 0 : 1
-  name                = var.infrastructure.vnets.management.subnet_mgmt.nsg.name
-  location            = var.infrastructure.region
-  resource_group_name = var.infrastructure.resource_group.is_existing ? data.azurerm_resource_group.resource-group[0].name : azurerm_resource_group.resource-group[0].name
-}
-
-# Creates SAP admin subnet nsg
-resource "azurerm_network_security_group" "nsg-admin" {
-  count               = var.infrastructure.vnets.sap.subnet_admin.nsg.is_existing ? 0 : 1
-  name                = var.infrastructure.vnets.sap.subnet_admin.nsg.name
-  location            = var.infrastructure.region
-  resource_group_name = var.infrastructure.resource_group.is_existing ? data.azurerm_resource_group.resource-group[0].name : azurerm_resource_group.resource-group[0].name
-}
-
-# Creates SAP db subnet nsg
-resource "azurerm_network_security_group" "nsg-db" {
-  count               = var.infrastructure.vnets.sap.subnet_db.nsg.is_existing ? 0 : 1
-  name                = var.infrastructure.vnets.sap.subnet_db.nsg.name
-  location            = var.infrastructure.region
-  resource_group_name = var.infrastructure.resource_group.is_existing ? data.azurerm_resource_group.resource-group[0].name : azurerm_resource_group.resource-group[0].name
-}
-
-# Creates SAP app subnet nsg
-resource "azurerm_network_security_group" "nsg-app" {
-  count               = var.is_single_node_hana ? 0 : lookup(var.infrastructure.sap, "subnet_app.nsg.is_existing", false) ? 0 : 1
-  name                = var.infrastructure.vnets.sap.subnet_app.nsg.name
-  location            = var.infrastructure.region
-  resource_group_name = var.infrastructure.resource_group.is_existing ? data.azurerm_resource_group.resource-group[0].name : azurerm_resource_group.resource-group[0].name
-}
-
-# Imports the mgmt subnet nsg data
-data "azurerm_network_security_group" "nsg-mgmt" {
-  count               = var.infrastructure.vnets.management.subnet_mgmt.nsg.is_existing ? 1 : 0
-  name                = split("/", var.infrastructure.vnets.management.subnet_mgmt.nsg.arm_id)[8]
-  resource_group_name = split("/", var.infrastructure.vnets.management.subnet_mgmt.nsg.arm_id)[4]
-}
-
-# Imports the SAP admin subnet nsg data
-data "azurerm_network_security_group" "nsg-admin" {
-  count               = var.infrastructure.vnets.sap.subnet_admin.nsg.is_existing ? 1 : 0
-  name                = split("/", var.infrastructure.vnets.sap.subnet_admin.nsg.arm_id)[8]
-  resource_group_name = split("/", var.infrastructure.vnets.sap.subnet_admin.nsg.arm_id)[4]
-}
-
-# Imports the SAP db subnet nsg data
-data "azurerm_network_security_group" "nsg-db" {
-  count               = var.infrastructure.vnets.sap.subnet_db.nsg.is_existing ? 1 : 0
-  name                = split("/", var.infrastructure.vnets.sap.subnet_db.nsg.arm_id)[8]
-  resource_group_name = split("/", var.infrastructure.vnets.sap.subnet_db.nsg.arm_id)[4]
-}
-
-# Imports the SAP app subnet nsg data
-data "azurerm_network_security_group" "nsg-app" {
-  count               = var.is_single_node_hana ? 0 : lookup(var.infrastructure.sap, "subnet_app.nsg.is_existing", false) ? 1 : 0
-  name                = split("/", var.infrastructure.vnets.sap.subnet_app.nsg.arm_id)[8]
-  resource_group_name = split("/", var.infrastructure.vnets.sap.subnet_app.nsg.arm_id)[4]
-}
-
 # Associates mgmt nsg to mgmt subnet
 resource "azurerm_subnet_network_security_group_association" "Associate-nsg-mgmt" {
   count                     = signum((var.infrastructure.vnets.management.is_existing ? 0 : 1) + (var.infrastructure.vnets.management.subnet_mgmt.nsg.is_existing ? 0 : 1))
@@ -255,7 +192,7 @@ resource "azurerm_storage_account" "storage-sapbits" {
   account_replication_type  = "LRS"
   account_tier              = var.software.storage_account_sapbits.account_tier
   account_kind              = var.software.storage_account_sapbits.account_kind
-  enable_https_traffic_only = [for sku in distinct([for database in var.databases : tonumber(database.os.sku) if lower(database.os.publisher) == "redhat"]) : sku if sku < 7.5] == [] ? true : false
+  enable_https_traffic_only = var.options.enable_secure_transfer == "" ? true : var.options.enable_secure_transfer
 }
 
 # Creates the storage container inside the storage account for SAP bits
@@ -287,5 +224,5 @@ resource "azurerm_storage_account" "storage-bootdiag" {
   location                  = var.infrastructure.region
   account_replication_type  = "LRS"
   account_tier              = "Standard"
-  enable_https_traffic_only = [for sku in distinct([for database in var.databases : tonumber(database.os.sku) if lower(database.os.publisher) == "redhat"]) : sku if sku < 7.5] == [] ? true : false
+enable_https_traffic_only = var.options.enable_secure_transfer == "" ? true : var.options.enable_secure_transfer
 }

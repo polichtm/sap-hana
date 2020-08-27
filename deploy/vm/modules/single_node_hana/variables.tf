@@ -178,27 +178,27 @@ variable "url_sapui5" {
 
 variable "url_shine_xsa" {
   description = "URL for SHINE XSA"
-  default     = "VAR_SHINE_XSA"
+  default     = "VAR_SHINE_XSA_URL"
 }
 
 variable "url_xs_services" {
   description = "URL for XS Services"
-  default     = "VAR_XS_SERVICES"
+  default     = "VAR_XS_SERVICES_URL"
 }
 
 variable "url_xsa_runtime" {
   description = "URL for XSA runtime"
-  default     = "VAR_XSA_RUNTIME"
+  default     = "VAR_XSA_RUNTIME_URL"
 }
 
 variable "url_xsa_hrtt" {
   description = "URL for HRTT"
-  default     = "VAR_HRTT"
+  default     = "VAR_HRTT_URL"
 }
 
 variable "url_xsa_webide" {
   description = "URL for WebIDE"
-  default     = "VAR_WEBIDE"
+  default     = "VAR_WEBIDE_URL"
 }
 
 variable "url_xsa_mta" {

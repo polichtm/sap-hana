@@ -107,7 +107,7 @@ variable "pwd_db_tenant" {
 
 variable "pwd_db_xsaadmin" {
   description = "Password for XSAADMIN user"
-  default     = ""
+  default     = "VAR_XSA_ADMIN_PASSWORD"
 }
 
 variable "sap_instancenum" {
@@ -133,12 +133,12 @@ variable "storage_disk_sizes_gb" {
 
 variable "url_cockpit" {
   description = "URL for HANA Cockpit"
-  default     = ""
+  default     = "VAR_HANA_COCKPIT_URL"
 }
 
 variable "url_di_core" {
   description = "URL for DI Core"
-  default     = ""
+  default     = "VAR_DI_CORE_URL"
 }
 
 variable "url_hana_studio_windows" {
@@ -153,7 +153,7 @@ variable "url_hana_studio_linux" {
 
 variable "url_portal_services" {
   description = "URL for Portal Services"
-  default     = ""
+  default     = "VAR_PORTAL_SERVICES_URL"
 }
 
 variable "url_sap_hdbserver" {
@@ -173,32 +173,32 @@ variable "url_sap_sapcar_linux" {
 
 variable "url_sapui5" {
   description = "URL for SAPUI5"
-  default     = ""
+  default     = "VAR_SAPUI5_URL"
 }
 
 variable "url_shine_xsa" {
   description = "URL for SHINE XSA"
-  default     = ""
+  default     = "VAR_SHINE_XSA"
 }
 
 variable "url_xs_services" {
   description = "URL for XS Services"
-  default     = ""
+  default     = "VAR_XS_SERVICES"
 }
 
 variable "url_xsa_runtime" {
   description = "URL for XSA runtime"
-  default     = ""
+  default     = "VAR_XSA_RUNTIME"
 }
 
 variable "url_xsa_hrtt" {
   description = "URL for HRTT"
-  default     = ""
+  default     = "VAR_HRTT"
 }
 
 variable "url_xsa_webide" {
   description = "URL for WebIDE"
-  default     = ""
+  default     = "VAR_WEBIDE"
 }
 
 variable "url_xsa_mta" {

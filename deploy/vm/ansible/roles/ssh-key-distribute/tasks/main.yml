@@ -13,3 +13,15 @@
     key: "{{ hostvars[inventory_hostname].cluster_public_ssh_key.stdout }}"
   delegate_to: "{{ item }}"
   loop: "{{ groups['linux'] }}"
+
+- name: enable PermitRootLogin 
+  lineinfile: 
+    path: /etc/ssh/sshd_config 
+    regexp: '^#PermitRootLogin yes(.*)$' 
+    line: 'PermitRootLogin yes'
+
+- name: set AuthorizedKeysFile path
+  lineinfile: 
+    path: /etc/ssh/sshd_config 
+    regexp: '^AuthorizedKeysFile(.*)$' 
+    line: 'AuthorizedKeysFile      .ssh/authorized_keys'

@@ -149,12 +149,12 @@ variable "storage_disk_sizes_gb" {
 
 variable "url_cockpit" {
   description = "URL for HANA Cockpit"
-  default     = ""
+  default     = "VAR_HANA_COCKPIT_URL"
 }
 
 variable "url_di_core" {
   description = "URL for DI Core"
-  default     = ""
+  default     = "VAR_DI_CORE_URL"
 }
 
 variable "url_hana_studio_windows" {
@@ -169,12 +169,12 @@ variable "url_hana_studio_linux" {
 
 variable "url_portal_services" {
   description = "URL for Portal Services"
-  default     = ""
+  default     = "VAR_PORTAL_SERVICES_URL"
 }
 
 variable "url_sap_hdbserver" {
   type        = string
-  description = "The url that points to the HDB server 122.17 bits"
+  description = "The URL that points to the HDB server 122.17 bits"
 }
 
 variable "url_sapcar_windows" {
@@ -189,32 +189,32 @@ variable "url_sap_sapcar_linux" {
 
 variable "url_sapui5" {
   description = "URL for SAPUI5"
-  default     = ""
+  default     = "VAR_SAPUI5_URL"
 }
 
 variable "url_shine_xsa" {
   description = "URL for SHINE XSA"
-  default     = ""
+  default     = "VAR_SHINE_XSA_URL"
 }
 
 variable "url_xs_services" {
   description = "URL for XS Services"
-  default     = ""
+  default     = "VAR_XS_SERVICES_URL"
 }
 
 variable "url_xsa_runtime" {
   description = "URL for XSA runtime"
-  default     = ""
+  default     = "VAR_XSA_RUNTIME_URL"
 }
 
 variable "url_xsa_hrtt" {
   description = "URL for HRTT"
-  default     = ""
+  default     = "VAR_HRTT_URL"
 }
 
 variable "url_xsa_webide" {
   description = "URL for WebIDE"
-  default     = ""
+  default     = "VAR_WEBIDE_URL"
 }
 
 variable "url_xsa_mta" {

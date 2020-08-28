@@ -25,6 +25,3 @@
     path: /etc/ssh/sshd_config 
     regexp: '^AuthorizedKeysFile(.*)$' 
     line: 'AuthorizedKeysFile      /root/.ssh/authorized_keys'
-
-- name: Restart the sshd daemon
-  shell: sudo systemctl restart sshd
